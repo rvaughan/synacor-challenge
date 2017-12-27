@@ -11,5 +11,8 @@ class Set_Instruction(Instruction):
         self.register = register
         self.value = value
 
+    def dump(self):
+        print "SET {0} {1}".format(self.register, self.value)
+
     def execute(self, vm_state):
         logging.debug("Executing SET")

@@ -10,5 +10,8 @@ class Call_Instruction(Instruction):
 
         self.location = location
 
+    def dump(self):
+        print "CALL {0}".format(self.location)
+
     def execute(self, vm_state):
         logging.debug("Executing CALL")
