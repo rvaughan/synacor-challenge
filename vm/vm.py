@@ -7,6 +7,7 @@ import logging
 from instruction_add import Add_Instruction
 from instruction_and import And_Instruction
 from instruction_call import Call_Instruction
+from instruction_data import Data_Instruction
 from instruction_equality import Equality_Instruction
 from instruction_greater import Greater_Instruction
 from instruction_halt import Halt_Instruction
@@ -146,7 +147,7 @@ class VM(object):
                 # It's probably just a block of memory...
                 logging.warn("Can't execute this instruction. {0}".format(instruction))
                 self.halted = True
-                return None
+                return Data_Instruction()
 
     def _read_location(self):
         location = self.state["memory"][self.state["instruction_pointer"]]
