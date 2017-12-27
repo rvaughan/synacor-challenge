@@ -11,7 +11,7 @@ class Add_Instruction(Instruction):
         self.value_b = value_b
 
     def dump(self, vm_state):
-        print "[{:04X}] ADD {:0} {:0} {:0}".format(vm_state["instruction_pointer"], self.location, self.value_a, self.value_b)
+        print "[{:04X}] ADD {:0} {:0} {:0}".format(vm_state["instruction_pointer"]-4, self.location, self.value_a, self.value_b)
 
     def execute(self, vm_state):
         val_a = self._get_value(vm_state, self.value_a)

@@ -12,7 +12,7 @@ class Set_Instruction(Instruction):
         self.value = value
 
     def dump(self, vm_state):
-        print "[{:04X}] SET {:0} {:0}".format(vm_state["instruction_pointer"], self.register, self.value)
+        print "[{:04X}] SET {:0} {:0}".format(vm_state["instruction_pointer"]-3, self.register, self.value)
 
     def execute(self, vm_state):
         logging.debug("Executing SET")

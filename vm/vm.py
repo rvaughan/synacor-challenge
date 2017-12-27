@@ -153,7 +153,8 @@ class VM(object):
                 location = self._read_location()
                 return Call_Instruction(location)
             elif instruction == 18:
-                return Ret_Instruction()
+                location = self._read_location()
+                return Ret_Instruction(location)
             elif instruction == 19:
                 location = self._read_location()
                 return Out_Instruction(location)
