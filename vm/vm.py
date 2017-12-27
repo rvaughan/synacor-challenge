@@ -135,8 +135,8 @@ class VM(object):
             elif instruction == 18:
                 return Ret_Instruction()
             elif instruction == 19:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                return Out_Instruction(location)
+                self.instruction_pointer, ascii_char = self._read_location(self.instruction_pointer)
+                return Out_Instruction(ascii_char)
             elif instruction == 20:
                 self.instruction_pointer, location = self._read_location(self.instruction_pointer)
                 return In_Instruction(location)
