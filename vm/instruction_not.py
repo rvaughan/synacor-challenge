@@ -11,8 +11,8 @@ class Not_Instruction(Instruction):
         self.location = location
         self.value = value
 
-    def dump(self):
-        print "NOT {0} {1}".format(self.location, self.value)
+    def dump(self, vm_state):
+        print "[{:04X}] NOT {:0} {:0}".format(vm_state["instruction_pointer"], self.location, self.value)
 
     def execute(self, vm_state):
         logging.debug("Executing NOT")

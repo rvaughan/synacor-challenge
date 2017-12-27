@@ -10,8 +10,8 @@ class Pop_Instruction(Instruction):
 
         self.location = location
 
-    def dump(self):
-        print "POP {0}".format(self.location)
+    def dump(self, vm_state):
+        print "[{:04X}] POP {:0}".format(vm_state["instruction_pointer"], self.location)
 
     def execute(self, vm_state):
         logging.debug("Executing POP")

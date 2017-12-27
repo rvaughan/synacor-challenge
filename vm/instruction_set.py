@@ -11,8 +11,8 @@ class Set_Instruction(Instruction):
         self.register = register
         self.value = value
 
-    def dump(self):
-        print "SET {0} {1}".format(self.register, self.value)
+    def dump(self, vm_state):
+        print "[{:04X}] SET {:0} {:0}".format(vm_state["instruction_pointer"], self.register, self.value)
 
     def execute(self, vm_state):
         logging.debug("Executing SET")

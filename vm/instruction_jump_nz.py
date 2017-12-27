@@ -9,8 +9,8 @@ class JNZ_Instruction(Instruction):
         self.value = value
         self.location = location
 
-    def dump(self):
-        print "JNZ {0} {1}".format(self.location, self.value)
+    def dump(self, vm_state):
+        print "[{:04X}] JNZ {:0} {:0}".format(vm_state["instruction_pointer"], self.location, self.value)
 
     def execute(self, vm_state):
         value = self._get_value(vm_state, self.value)

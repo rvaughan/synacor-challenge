@@ -69,7 +69,7 @@ class VM(object):
         instruction = self._get_next_instruction()
 
         if instruction != None:
-            instruction.dump()
+            instruction.dump(self.state)
 
     def _get_next_instruction(self):
         """
