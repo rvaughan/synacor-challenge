@@ -7,5 +7,5 @@ class Call_Instruction(object):
 
         self.location = location
 
-    def execute(self, memory, registers):
+    def execute(self, vm_state):
         logging.debug("Executing CALL")

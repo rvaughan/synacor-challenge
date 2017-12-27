@@ -39,106 +39,106 @@ class VM(object):
 
         memory_file - is the filename of the VM memory data.
         """
-        self.current_instruction = None
-        self.instruction_pointer = 0
+        self.state = {}
+        self.state["instruction_pointer"] = 0
         self.halted = True
 
         with open(memory_file, "rb") as f:
-            self.memory = bytearray(f.read())
+            self.state["memory"] = bytearray(f.read())
 
-        self.registers = defaultdict(int)
+        self.state["registers"] = defaultdict(int)
 
-        self.stack = []
+        self.state["stack"] = []
 
 
     def _get_next_instruction(self):
         """
         Processes the memory location as if it were an instruction
         """
-        if self.instruction_pointer < len(self.memory):
-            self.instruction_pointer, instruction = self._read_location(self.instruction_pointer)
+        if self.state["instruction_pointer"] < len(self.state["memory"]):
+            instruction = self._read_location()
 
             if instruction == 0:
                 self.halted = True
                 return Halt_Instruction()
             elif instruction == 1:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value = self._read_location()
                 return Set_Instruction(location, value)
             elif instruction == 2:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
+                location = self._read_location()
                 return Push_Instruction(location)
             elif instruction == 3:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
+                location = self._read_location()
                 return Pop_Instruction(location)
             elif instruction == 4:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return Equality_Instruction(location, value_a, value_b)
             elif instruction == 5:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return Greater_Instruction(location, value_a, value_b)
             elif instruction == 6:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
+                location = self._read_location()
                 return Jump_Instruction(location)
             elif instruction == 7:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value = self._read_location()
                 return JNZ_Instruction(location, value)
             elif instruction == 8:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value = self._read_location()
                 return JZ_Instruction(location, value)
             elif instruction == 9:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return Add_Instruction(location, value_a, value_b)
             elif instruction == 10:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return Multiply_Instruction(location, value_a, value_b)
             elif instruction == 11:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return Mod_Instruction(location, value_a, value_b)
             elif instruction == 12:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return And_Instruction(location, value_a, value_b)
             elif instruction == 13:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_a = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value_b = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value_a = self._read_location()
+                value_b = self._read_location()
                 return Or_Instruction(location, value_a, value_b)
             elif instruction == 14:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value = self._read_location()
                 return Not_Instruction(location, value)
             elif instruction == 15:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value = self._read_location()
                 return RMem_Instruction(location, value)
             elif instruction == 16:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
-                self.instruction_pointer, value = self._read_location(self.instruction_pointer)
+                location = self._read_location()
+                value = self._read_location()
                 return WMem_Instruction(location, value)
             elif instruction == 17:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
+                location = self._read_location()
                 return Call_Instruction(location)
             elif instruction == 18:
                 return Ret_Instruction()
             elif instruction == 19:
-                self.instruction_pointer, ascii_char = self._read_location(self.instruction_pointer)
+                ascii_char = self._read_location()
                 return Out_Instruction(ascii_char)
             elif instruction == 20:
-                self.instruction_pointer, location = self._read_location(self.instruction_pointer)
+                location = self._read_location()
                 return In_Instruction(location)
             elif instruction == 21:
                 return NOOP_Instruction()
@@ -148,27 +148,28 @@ class VM(object):
                 self.halted = True
                 return None
 
-    def _read_location(self, start_pos):
-        pos = start_pos
-        location = self.memory[pos]
-        pos += 1
-        location = (self.memory[pos] * 256) + location
+    def _read_location(self):
+        location = self.state["memory"][self.state["instruction_pointer"]]
+        self.state["instruction_pointer"] += 1
+        location = (self.state["memory"][self.state["instruction_pointer"]] * 256) + location
 
-        return pos + 1, location
+        self.state["instruction_pointer"] += 1
+
+        return location
 
     def run(self, start_instruction=0):
         """
         Runs the virtual machine, starting from the specified instruction
         pointer position.
         """
-        self.instruction_pointer = start_instruction * 2
+        self.state["instruction_pointer"] = start_instruction * 2
 
         self.halted = False
         while not self.halted:
             self._execute_instruction()
 
     def _execute_instruction(self):
-        self.current_instruction = self._get_next_instruction()
+        instruction = self._get_next_instruction()
 
-        if self.current_instruction != None:
-            self.current_instruction.execute(self.memory, self.registers)
+        if instruction != None:
+            instruction.execute(self.state)

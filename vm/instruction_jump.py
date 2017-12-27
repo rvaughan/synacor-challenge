@@ -3,9 +3,7 @@ import logging
 class Jump_Instruction(object):
 
     def __init__(self, location):
-        logging.debug("Creating JMP")
-
         self.location = location
 
-    def execute(self, memory, registers):
-        logging.debug("Executing JMP")
+    def execute(self, vm_state):
+        vm_state["instruction_pointer"] = self.location
