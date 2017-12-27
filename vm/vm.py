@@ -45,6 +45,7 @@ class VM(object):
         self.state["instruction_pointer"] = 0
         self.state["memory"] = []
         self.halted = True
+        self.end_of_program = False
 
         with open(memory_file, "rb") as f:
             chunk = f.read(2)
@@ -56,6 +57,19 @@ class VM(object):
 
         self.state["stack"] = []
 
+    def dump(self, start_instruction=0):
+        """
+        """
+        self.state["instruction_pointer"] = start_instruction
+
+        while not self.end_of_program:
+            self._dump_instruction()
+
+    def _dump_instruction(self):
+        instruction = self._get_next_instruction()
+
+        if instruction != None:
+            instruction.dump()
 
     def _get_next_instruction(self):
         """
@@ -150,11 +164,11 @@ class VM(object):
                 return NOOP_Instruction()
             else:
                 # It's probably just a block of memory...
-                logging.warn("Can't execute this instruction. [%d]", instruction)
+                # logging.warn("Can't execute this instruction. [%d]", instruction)
                 self.halted = True
-                return Data_Instruction()
+                return Data_Instruction(instruction)
         else:
-            self.halted = True
+            self.end_of_program = True
 
     def _read_location(self):
         location = self.state["memory"][self.state["instruction_pointer"]]
@@ -173,7 +187,7 @@ class VM(object):
         self.state["instruction_pointer"] = start_instruction
 
         self.halted = False
-        while not self.halted:
+        while not self.halted and not self.end_of_program:
             self._execute_instruction()
 
     def _execute_instruction(self):
