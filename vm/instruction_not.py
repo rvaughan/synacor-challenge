@@ -1,6 +1,9 @@
 import logging
 
-class Not_Instruction(object):
+from instruction import Instruction
+
+
+class Not_Instruction(Instruction):
 
     def __init__(self, location, value):
         logging.debug("Creating NOT")

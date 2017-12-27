@@ -1,6 +1,9 @@
 import logging
 
-class WMem_Instruction(object):
+from instruction import Instruction
+
+
+class WMem_Instruction(Instruction):
 
     def __init__(self, location, value):
         logging.debug("Creating WMEM")

@@ -1,6 +1,9 @@
 import logging
 
-class Data_Instruction(object):
+from instruction import Instruction
+
+
+class Data_Instruction(Instruction):
 
     def __init__(self):
         logging.debug("Creating DATA")

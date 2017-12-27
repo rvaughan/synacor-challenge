@@ -1,9 +1,12 @@
 import logging
 
-class NOOP_Instruction(object):
+from instruction import Instruction
+
+
+class NOOP_Instruction(Instruction):
 
     def __init__(self):
-        logging.debug("Creating NOOP")
+        pass
 
     def execute(self, vm_state):
-        logging.info("Executing NOOP")
+        pass

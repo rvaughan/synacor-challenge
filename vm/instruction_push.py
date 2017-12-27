@@ -1,6 +1,9 @@
 import logging
 
-class Push_Instruction(object):
+from instruction import Instruction
+
+
+class Push_Instruction(Instruction):
 
     def __init__(self, value):
         logging.debug("Creating PSH")

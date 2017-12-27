@@ -1,6 +1,9 @@
 import logging
 
-class Set_Instruction(object):
+from instruction import Instruction
+
+
+class Set_Instruction(Instruction):
 
     def __init__(self, register, value):
         logging.debug("Creating SET")

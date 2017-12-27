@@ -1,6 +1,9 @@
 import logging
 
-class Halt_Instruction(object):
+from instruction import Instruction
+
+
+class Halt_Instruction(Instruction):
 
     def __init__(self):
         logging.debug("Creating HALT")

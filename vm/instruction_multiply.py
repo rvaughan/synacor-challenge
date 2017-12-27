@@ -1,6 +1,9 @@
 import logging
 
-class Multiply_Instruction(object):
+from instruction import Instruction
+
+
+class Multiply_Instruction(Instruction):
 
     def __init__(self, location, value_a, value_b):
         logging.debug("Creating MULT")

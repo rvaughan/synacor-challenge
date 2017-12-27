@@ -1,6 +1,9 @@
 import logging
 
-class Jump_Instruction(object):
+from instruction import Instruction
+
+
+class Jump_Instruction(Instruction):
 
     def __init__(self, location):
         self.location = location

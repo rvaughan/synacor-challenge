@@ -1,6 +1,9 @@
 import logging
 
-class Mod_Instruction(object):
+from instruction import Instruction
+
+
+class Mod_Instruction(Instruction):
 
     def __init__(self, location, value_a, value_b):
         logging.debug("Creating MOD")

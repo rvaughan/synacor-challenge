@@ -1,6 +1,9 @@
 import logging
 
-class In_Instruction(object):
+from instruction import Instruction
+
+
+class In_Instruction(Instruction):
 
     def __init__(self, location):
         logging.debug("Creating IN")

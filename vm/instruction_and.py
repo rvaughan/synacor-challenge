@@ -1,6 +1,9 @@
 import logging
 
-class And_Instruction(object):
+from instruction import Instruction
+
+
+class And_Instruction(Instruction):
 
     def __init__(self, location, value_a, value_b):
         logging.debug("Creating AND")

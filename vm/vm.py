@@ -3,6 +3,7 @@ This module represents the Virtual Machine.
 """
 from collections import defaultdict
 import logging
+import struct
 
 from instruction_add import Add_Instruction
 from instruction_and import And_Instruction
@@ -42,10 +43,14 @@ class VM(object):
         """
         self.state = {}
         self.state["instruction_pointer"] = 0
+        self.state["memory"] = []
         self.halted = True
 
         with open(memory_file, "rb") as f:
-            self.state["memory"] = bytearray(f.read())
+            chunk = f.read(2)
+            while chunk != '':
+                self.state["memory"].append(struct.unpack('<H', chunk)[0])
+                chunk = f.read(2)
 
         self.state["registers"] = defaultdict(int)
 
@@ -86,13 +91,13 @@ class VM(object):
                 location = self._read_location()
                 return Jump_Instruction(location)
             elif instruction == 7:
-                location = self._read_location()
                 value = self._read_location()
-                return JNZ_Instruction(location, value)
+                location = self._read_location()
+                return JNZ_Instruction(value, location)
             elif instruction == 8:
-                location = self._read_location()
                 value = self._read_location()
-                return JZ_Instruction(location, value)
+                location = self._read_location()
+                return JZ_Instruction(value, location)
             elif instruction == 9:
                 location = self._read_location()
                 value_a = self._read_location()
@@ -136,8 +141,8 @@ class VM(object):
             elif instruction == 18:
                 return Ret_Instruction()
             elif instruction == 19:
-                ascii_char = self._read_location()
-                return Out_Instruction(ascii_char)
+                location = self._read_location()
+                return Out_Instruction(location)
             elif instruction == 20:
                 location = self._read_location()
                 return In_Instruction(location)
@@ -145,14 +150,16 @@ class VM(object):
                 return NOOP_Instruction()
             else:
                 # It's probably just a block of memory...
-                logging.warn("Can't execute this instruction. {0}".format(instruction))
+                logging.warn("Can't execute this instruction. [%d]", instruction)
                 self.halted = True
                 return Data_Instruction()
+        else:
+            self.halted = True
 
     def _read_location(self):
         location = self.state["memory"][self.state["instruction_pointer"]]
-        self.state["instruction_pointer"] += 1
-        location = (self.state["memory"][self.state["instruction_pointer"]] * 256) + location
+        # self.state["instruction_pointer"] += 1
+        # location = (self.state["memory"][self.state["instruction_pointer"]] * 256) + location
 
         self.state["instruction_pointer"] += 1
 
@@ -163,7 +170,7 @@ class VM(object):
         Runs the virtual machine, starting from the specified instruction
         pointer position.
         """
-        self.state["instruction_pointer"] = start_instruction * 2
+        self.state["instruction_pointer"] = start_instruction
 
         self.halted = False
         while not self.halted:

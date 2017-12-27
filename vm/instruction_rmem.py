@@ -1,6 +1,9 @@
 import logging
 
-class RMem_Instruction(object):
+from instruction import Instruction
+
+
+class RMem_Instruction(Instruction):
 
     def __init__(self, location, value):
         logging.debug("Creating RMEM")

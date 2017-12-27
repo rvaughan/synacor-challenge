@@ -1,6 +1,9 @@
 import logging
 
-class Pop_Instruction(object):
+from instruction import Instruction
+
+
+class Pop_Instruction(Instruction):
 
     def __init__(self, location):
         logging.debug("Creating POP")

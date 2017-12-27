@@ -1,12 +1,17 @@
 import logging
 
-class JZ_Instruction(object):
+from instruction import Instruction
 
-    def __init__(self, location, value):
+
+class JZ_Instruction(Instruction):
+
+    def __init__(self, value, location):
         logging.debug("Creating JZ")
 
-        self.location = location
         self.value = value
+        self.location = location
 
     def execute(self, vm_state):
-        logging.debug("Executing JZ")
+        value = self._get_value(vm_state, self.value)
+        if value == 0:
+            vm_state["instruction_pointer"] = self.value

@@ -1,12 +1,15 @@
 import logging
 
-class JNZ_Instruction(object):
+from instruction import Instruction
 
-    def __init__(self, location, value_a):
-        logging.debug("Creating JNZ")
 
+class JNZ_Instruction(Instruction):
+
+    def __init__(self, value, location):
+        self.value = value
         self.location = location
-        self.value_a = value_a
 
     def execute(self, vm_state):
-        logging.debug("Executing JNZ")
+        value = self._get_value(vm_state, self.value)
+        if value != 0:
+            vm_state["instruction_pointer"] = self.value

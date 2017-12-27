@@ -1,6 +1,9 @@
 import logging
 
-class Ret_Instruction(object):
+from instruction import Instruction
+
+
+class Ret_Instruction(Instruction):
 
     def __init__(self):
         logging.debug("Creating RET")

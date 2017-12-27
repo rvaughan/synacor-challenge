@@ -1,6 +1,9 @@
 import logging
 
-class Call_Instruction(object):
+from instruction import Instruction
+
+
+class Call_Instruction(Instruction):
 
     def __init__(self, location):
         logging.debug("Creating CALL")

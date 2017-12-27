@@ -1,9 +1,12 @@
 import sys
 
-class Out_Instruction(object):
+from instruction import Instruction
 
-    def __init__(self, ascii_char):
-        self.ascii_char = ascii_char
+
+class Out_Instruction(Instruction):
+
+    def __init__(self, location):
+        self.location = location
 
     def execute(self, vm_state):
-        sys.stdout.write(chr(self.ascii_char))
+        sys.stdout.write(chr(self.location))
