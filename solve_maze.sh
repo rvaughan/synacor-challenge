@@ -82,7 +82,7 @@ send "look strange book\r"
 
 # At this point you see some text which essentially indicates that you need
 # to put a specific value in the 8th register to use the teleporter to get
-# somewhere interesting.
+# somewhere interesting. Look in teleport_book.txt for the details.
 # The exact value needs to be calculated by extracting the teleportation
 # algorithm and re-implementing it in an optimal manner.
 
