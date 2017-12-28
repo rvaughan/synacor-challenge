@@ -9,7 +9,7 @@ class Instruction(object):
         if location < 32768:
             return location
         elif location < 32776:
-            reg_id = location - 32768
+            reg_id = location % 32768
             return vm_state["registers"][reg_id]
         else:
             # Invalid
@@ -20,7 +20,7 @@ class Instruction(object):
         if location < 32768:
             vm_state["memory"][location] = value
         elif location < 32776:
-            reg_id = location - 32768
+            reg_id = location % 32768
             vm_state["registers"][reg_id] = value
         else:
             # Invalid
