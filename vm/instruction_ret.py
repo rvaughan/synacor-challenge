@@ -9,7 +9,7 @@ class Ret_Instruction(Instruction):
         pass
 
     def dump(self, vm_state):
-        print "[{:04X}] RET".format(vm_state["instruction_pointer"]-2)
+        print "[{:04X}] RET".format(vm_state["instruction_pointer"]-1)
 
     def execute(self, vm_state):
         vm_state["instruction_pointer"] = vm_state["stack"].pop()
