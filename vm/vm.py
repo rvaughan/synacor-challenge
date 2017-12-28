@@ -71,6 +71,10 @@ class VM(object):
         if instruction != None:
             instruction.dump(self.state)
 
+    def dump_registers(self):
+        for idx in xrange(8):
+            print "Register {0} = {1}".format(idx, self.state["registers"][idx])
+
     def _get_next_instruction(self):
         """
         Processes the memory location as if it were an instruction
