@@ -17,15 +17,3 @@ vm = VM(sys.argv[1])
 
 # Run the first program
 vm.run(start_instruction=0)
-
-# print "----"
-
-# # Run the second program
-# vm.run(start_instruction=19)
-
-# print "----"
-
-# # Run the third program
-# vm.run(start_instruction=21)
-
-# print "----"
