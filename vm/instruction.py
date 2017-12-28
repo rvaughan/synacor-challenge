@@ -7,7 +7,7 @@ class Instruction(object):
 
     def _get_value(self, vm_state, location):
         if location < 32768:
-            return vm_state["memory"][location]
+            return location
         elif location < 32776:
             reg_id = location - 32768
             return vm_state["registers"][reg_id]

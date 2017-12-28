@@ -189,6 +189,7 @@ class VM(object):
             self._execute_instruction()
 
     def _execute_instruction(self):
+        # print "0x{:04X}".format(self.state["instruction_pointer"])
         instruction = self._get_next_instruction()
 
         if instruction != None:
