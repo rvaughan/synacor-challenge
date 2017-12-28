@@ -165,7 +165,6 @@ class VM(object):
                 return NOOP_Instruction()
             else:
                 # It's probably just a block of memory...
-                # logging.warn("Can't execute this instruction. [%d]", instruction)
                 self.halted = True
                 return Data_Instruction(instruction)
         else:
@@ -173,8 +172,6 @@ class VM(object):
 
     def _read_location(self):
         location = self.state["memory"][self.state["instruction_pointer"]]
-        # self.state["instruction_pointer"] += 1
-        # location = (self.state["memory"][self.state["instruction_pointer"]] * 256) + location
 
         self.state["instruction_pointer"] += 1
 
