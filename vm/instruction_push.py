@@ -9,7 +9,7 @@ class Push_Instruction(Instruction):
         self.value = value
 
     def dump(self, vm_state):
-        print "[{:04X}] PSH {:0}".format(vm_state["instruction_pointer"]-2, self.value)
+        return "[{:04X}] PSH {:0}".format(vm_state["instruction_pointer"]-2, self.value)
 
     def execute(self, vm_state):
         value = self._get_value(vm_state, self.value)

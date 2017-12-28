@@ -11,7 +11,7 @@ class In_Instruction(Instruction):
         self.location = location
 
     def dump(self, vm_state):
-        print "[{:04X}] IN {:0}".format(vm_state["instruction_pointer"]-2, self.location)
+        return "[{:04X}] IN {:0}".format(vm_state["instruction_pointer"]-2, self.location)
 
     def execute(self, vm_state):
         logging.debug("Executing IN")

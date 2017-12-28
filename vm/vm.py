@@ -57,19 +57,21 @@ class VM(object):
 
         self.state["stack"] = []
 
-    def dump(self, start_instruction=0):
+    def dump(self, output_file, start_instruction=0):
         """
         """
         self.state["instruction_pointer"] = start_instruction
 
         while not self.end_of_program:
-            self._dump_instruction()
+            output_file.write("{0}\n".format(self._dump_instruction()))
 
     def _dump_instruction(self):
         instruction = self._get_next_instruction()
 
         if instruction != None:
-            instruction.dump(self.state)
+            return instruction.dump(self.state)
+        else:
+            return "XXXX ?????"
 
     def dump_registers(self):
         for idx in xrange(8):
@@ -180,7 +182,7 @@ class VM(object):
 
         return location
 
-    def run(self, start_instruction=0):
+    def run(self, start_instruction=0, debug=False, debug_file=None):
         """
         Runs the virtual machine, starting from the specified instruction
         pointer position.
@@ -189,11 +191,14 @@ class VM(object):
 
         self.halted = False
         while not self.halted and not self.end_of_program:
-            self._execute_instruction()
+            self._execute_instruction(debug, debug_file)
 
-    def _execute_instruction(self):
+    def _execute_instruction(self, debug=False, debug_file=None):
         # print "0x{:04X}".format(self.state["instruction_pointer"])
         instruction = self._get_next_instruction()
 
         if instruction != None:
+            if debug:
+                debug_file.write("{0}\n".format(instruction.dump(self.state)))
+
             instruction.execute(self.state)

@@ -8,10 +8,11 @@ import sys
 from vm.vm import VM
 
 
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 logging.basicConfig(level=logging.DEBUG)
 
 vm = VM(sys.argv[1])
 
-# Dump the VM
-vm.dump(start_instruction=0)
+with open("decoded.txt", "w") as f:
+    # Dump the VM
+    vm.dump(f, start_instruction=0)

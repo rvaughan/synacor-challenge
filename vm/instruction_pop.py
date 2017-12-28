@@ -9,7 +9,7 @@ class Pop_Instruction(Instruction):
         self.location = location
 
     def dump(self, vm_state):
-        print "[{:04X}] POP {:0}".format(vm_state["instruction_pointer"]-2, self.location)
+        return "[{:04X}] POP {:0}".format(vm_state["instruction_pointer"]-2, self.location)
 
     def execute(self, vm_state):
         value = vm_state["stack"].pop()

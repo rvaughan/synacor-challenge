@@ -26,7 +26,7 @@ class Out_Instruction(Instruction):
         if chr_val == "\n":
             chr_val = "\\n"
 
-        print "[{:04X}] OUT {:0} '{}'".format(vm_state["instruction_pointer"]-2, self.location, chr_val)
+        return "[{:04X}] OUT {:0} '{}'".format(vm_state["instruction_pointer"]-2, self.location, chr_val)
 
     def execute(self, vm_state):
         sys.stdout.write(self._get_char(vm_state))

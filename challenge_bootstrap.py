@@ -16,4 +16,8 @@ logging.basicConfig(level=logging.INFO)
 vm = VM("challenge.bin")
 
 # Run the first program
-vm.run(start_instruction=0)
+
+# vm.run(start_instruction=0)
+
+with open("instructions.txt", "w") as f:
+    vm.run(start_instruction=0, debug=True, debug_file=f)
