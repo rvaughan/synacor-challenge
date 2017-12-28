@@ -9,7 +9,7 @@ class Halt_Instruction(Instruction):
         logging.debug("Creating HALT")
 
     def dump(self, vm_state):
-        print "[{:04}] HALT".format(vm_state["instruction_pointer"]-1)
+        print "[{:04X}] HALT".format(vm_state["instruction_pointer"]-1)
 
     def execute(self, vm_state):
         logging.info("Execution HALT'd")
