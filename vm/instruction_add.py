@@ -17,6 +17,6 @@ class Add_Instruction(Instruction):
         val_a = self._get_value(vm_state, self.value_a)
         val_b = self._get_value(vm_state, self.value_b)
 
-        result = val_a + val_b
+        result = (val_a + val_b) % 32768
 
         self._set_value(vm_state, self.location, result)
