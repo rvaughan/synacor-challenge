@@ -44,6 +44,7 @@ class VM(object):
         self.state = {}
         self.state["instruction_pointer"] = 0
         self.state["memory"] = []
+        self.state["user_input"] = None
         self.halted = True
         self.end_of_program = False
 
