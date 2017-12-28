@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """
-This module attempts to solve the Synacor challenge.
+This module attempts to solve the Synacor challenge, this script runs program
+zero.
 
     website: https://challenge.synacor.com/
 """
@@ -10,10 +11,9 @@ import sys
 from vm.vm import VM
 
 
-# logging.basicConfig(level=logging.INFO)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
-vm = VM(sys.argv[1])
+vm = VM("challenge.bin")
 
 # Run the first program
 vm.run(start_instruction=0)
