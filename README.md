@@ -19,3 +19,4 @@ the code in this repository may induce nausea, bleeding from the eyes, etc.
   * 'fpjUOYRvdaom' is the code seen once you successfully have implemented the VM code and can boot it successfully.
   * 'qsRPZyoaLRDU' written on the tablet in the starting position in the maze.
   * 'TyOEbnBAYmlR' found on the walls within the maze.
+  * 'tsToDGDSRalc' seen after using the teleporter.
