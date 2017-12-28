@@ -16,16 +16,17 @@ class Out_Instruction(Instruction):
         else:
             result = self._get_value(vm_state, self.location)
 
-        if result == 10:
-            return '\\n'
-        else:
-            try:
-                return chr(result)
-            except ValueError:
-                return '*'
+        try:
+            return chr(result)
+        except ValueError:
+            return '*'
 
     def dump(self, vm_state):
-        print "[{:04X}] OUT {:0} '{}'".format(vm_state["instruction_pointer"]-2, self.location, self._get_char(vm_state))
+        chr_val = self._get_char(vm_state)
+        if chr_val == "\n":
+            chr_val = "\\n"
+
+        print "[{:04X}] OUT {:0} '{}'".format(vm_state["instruction_pointer"]-2, self.location, chr_val)
 
     def execute(self, vm_state):
         sys.stdout.write(self._get_char(vm_state))
