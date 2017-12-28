@@ -16,3 +16,4 @@ the code in this repository may induce nausea, bleeding from the eyes, etc.
 
   * 'IfulsTiNMnCF' is found in the architecture spec document.
   * 'LeMMfJlsaONr' is the first code printed out by the virtual machine when running instruction 0.
+  * 'fpjUOYRvdaom' is the code seen once you successfully have implemented the VM code and can boot it successfully.
